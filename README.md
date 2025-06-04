@@ -1,18 +1,10 @@
-# PSP Web Dashboard (Private)
+# PSP Core Backend
 
-Your personal AI trading command center for ProfitSeerProBot.
+This is the FastAPI backend server for ProfitSeerProBot (PSP).
 
 ## Quick Start
 
 ```bash
-cd client
-npm i
-VITE_PSP_PASS=yourSecret npm run dev
-```
-
-## Build
-
-```bash
-cd client
-npm run build
+pip install -r requirements.txt
+uvicorn main:app --reload
 ```
