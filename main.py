@@ -1,21 +1,42 @@
-from fastapi import FastAPI
-from fastapi.middleware.cors import CORSMiddleware
+from fastapi import FastAPI, HTTPException
+from pydantic import BaseModel
+from typing import Optional
+import random
 
 app = FastAPI()
 
-origins = [
-    "http://localhost:5173",
-    "https://psp-dashboard.onrender.com"
-]
+class TradeSignal(BaseModel):
+    symbol: str
+    action: str  # "buy" or "sell"
+    amount: float
 
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=origins,
-    allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
-)
+class TradeExecutionResponse(BaseModel):
+    trade_id: str
+    symbol: str
+    action: str
+    amount: float
+    status: str
+    price_executed: Optional[float] = None
 
 @app.get("/")
 async def root():
     return {"message": "PSP Core API is running!"}
+
+@app.post("/trade-signal", response_model=TradeExecutionResponse)
+async def receive_signal(signal: TradeSignal):
+    if signal.amount <= 0:
+        raise HTTPException(status_code=400, detail="Amount must be positive")
+    if signal.action.lower() not in ["buy", "sell"]:
+        raise HTTPException(status_code=400, detail="Action must be 'buy' or 'sell'")
+
+    simulated_price = round(random.uniform(1000, 50000), 2)
+    trade_id = f"trade_{random.randint(10000, 99999)}"
+
+    return TradeExecutionResponse(
+        trade_id=trade_id,
+        symbol=signal.symbol,
+        action=signal.action.lower(),
+        amount=signal.amount,
+        status="executed",
+        price_executed=simulated_price
+    )
