@@ -1,9 +1,9 @@
-import Dashboard from './Dashboard';
+import dashboard from './dashboard';
 
 function App() {
   return (
     <div className="min-h-screen bg-gray-900 text-white">
-      <Dashboard />
+      <dashboard />
     </div>
   );
 }
