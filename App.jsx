@@ -1,9 +1,11 @@
+import Dashboard from './Dashboard';
+
 function App() {
   return (
-    <div className="p-4 text-center text-xl">
-      <h1 className="text-3xl font-bold">Welcome to PSP Dashboard 🐉</h1>
-      <p>This is your Vite + React + Tailwind setup!</p>
+    <div className="min-h-screen bg-gray-900 text-white">
+      <Dashboard />
     </div>
   );
 }
+
 export default App;
