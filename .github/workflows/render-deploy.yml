@@ -19,13 +19,14 @@ jobs:
         with:
           node-version: '22'
 
-      - name: Install Frontend Dependencies
-        working-directory: ./src/psp-client
-        run: npm install
+      # Frontend build steps commented out until frontend folder exists
+      # - name: Install Frontend Dependencies
+      #   working-directory: ./src/psp-client
+      #   run: npm install
 
-      - name: Build Frontend
-        working-directory: ./src/psp-client
-        run: npm run build
+      # - name: Build Frontend
+      #   working-directory: ./src/psp-client
+      #   run: npm run build
 
       # Setup Python
       - name: Setup Python
