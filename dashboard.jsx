@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { Mic, Send } from 'lucide-react';
 
-export default function Dashboard() {
+export default function dashboard() {
   const [signal, setSignal] = useState('');
   const [logs, setLogs] = useState([]);
   const [voiceMode, setVoiceMode] = useState(false);
