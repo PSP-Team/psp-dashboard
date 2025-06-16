@@ -3,21 +3,33 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { Mic, Send } from 'lucide-react';
+import API_BASE_URL from "./config";
 
 export default function Dashboard() {
   const [signal, setSignal] = useState('');
   const [logs, setLogs] = useState([]);
   const [voiceMode, setVoiceMode] = useState(false);
 
-  const handleSignalSubmit = () => {
-    if (!signal.trim()) return; // minor improvement: avoid blank signals
+  const handleSignalSubmit = async () => {
+    if (!signal.trim()) return;
+
     setLogs(prev => [...prev, `🧑‍💻 You: ${signal}`]);
-
-    setTimeout(() => {
-      setLogs(prev => [...prev, `🐉 PSP: Processing signal "${signal}"...`]);
-    }, 500);
-
     setSignal('');
+
+    try {
+      const res = await fetch(`${API_BASE_URL}/trade-signal`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ signal }),
+      });
+
+      const data = await res.json();
+      setLogs(prev => [...prev, `🐉 PSP: ${data.response || 'No response received.'}`]);
+    } catch (error) {
+      setLogs(prev => [...prev, `❌ Error: ${error.message}`]);
+    }
   };
 
   return (
