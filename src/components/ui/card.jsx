@@ -16,7 +16,7 @@ export function CardHeader({ title, subtitle }) {
   return (
     <div className="mb-2">
       <h2 className="text-xl font-semibold">{title}</h2>
-      {subtitle && <p className="text-sm text-gray-500`}>{subtitle}</p>}
+      {subtitle && <p className="text-sm text-gray-500">{subtitle}</p>}
     </div>
   );
 }
