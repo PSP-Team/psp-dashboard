@@ -1,7 +1,7 @@
 // src/components/ui/textarea.jsx
 import React from 'react';
 
-const Textarea = ({ value, onChange, placeholder, className }) => {
+export function Textarea({ value, onChange, placeholder, className }) {
   return (
     <textarea
       value={value}
@@ -11,6 +11,4 @@ const Textarea = ({ value, onChange, placeholder, className }) => {
       rows={4}
     />
   );
-};
-
-export default Textarea;
+}
