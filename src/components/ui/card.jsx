@@ -1,10 +1,16 @@
 // src/components/ui/card.jsx
 
-import React from 'react';
-
 export function Card({ children, className = '' }) {
   return (
-    <div className={`rounded-2xl p-4 shadow-md bg-white dark:bg-gray-900 ${className}`}>
+    <div className={`rounded-xl shadow-lg p-4 bg-white dark:bg-gray-800 ${className}`}>
+      {children}
+    </div>
+  );
+}
+
+export function CardContent({ children, className = '' }) {
+  return (
+    <div className={`p-2 ${className}`}>
       {children}
     </div>
   );
